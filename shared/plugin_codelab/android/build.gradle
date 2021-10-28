@@ -1,0 +1,60 @@
+apply plugin: 'com.android.library'
+apply plugin: 'maven'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+group 'com.example.plugin_codelab'
+version '1.0'
+
+buildscript {
+    repositories {
+        maven {
+            url = "http://download.flutter.io"
+        }
+        google()
+        jcenter()
+    }
+
+    dependencies {
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${findProperty("version.kotlin")}")
+        classpath("com.android.tools.build:gradle:4.1.3")
+    }
+}
+
+rootProject.allprojects {
+    repositories {
+        maven {
+            url = "http://download.flutter.io"
+        }
+        google()
+        jcenter()
+    }
+}
+
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 30
+
+    defaultConfig {
+        minSdkVersion 16
+    }
+
+    sourceSets {
+        main {
+            java {
+                include '**/*.java'
+                include '**/*.kt'
+
+                srcDirs("src/main/kotlin")
+            }
+        }
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    implementation project(':shared')
+}
